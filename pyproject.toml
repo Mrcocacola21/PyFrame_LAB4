@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ip-geolocation-service"
+version = "0.1.0"
+description = "FastAPI service for authenticated IP geolocation lookups with MongoDB history."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "bcrypt>=4.1.3,<5.0.0",
+  "fastapi>=0.115.0,<1.0.0",
+  "httpx>=0.28.0,<0.29.0",
+  "itsdangerous>=2.2.0,<3.0.0",
+  "Jinja2>=3.1.5,<4.0.0",
+  "motor>=3.7.0,<4.0.0",
+  "pydantic-settings>=2.8.0,<3.0.0",
+  "python-multipart>=0.0.20,<0.1.0",
+  "PyJWT>=2.10.1,<3.0.0",
+  "uvicorn[standard]>=0.34.0,<0.35.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "asgi-lifespan>=2.1.0,<3.0.0",
+  "pytest>=8.3.4,<9.0.0",
+  "pytest-asyncio>=0.25.3,<0.26.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+asyncio_mode = "auto"
+testpaths = ["tests"]

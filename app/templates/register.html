@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Register | GeoTrace{% endblock %}
+
+{% block content %}
+<section class="auth-shell">
+    <article class="auth-card">
+        <span class="eyebrow">Create Account</span>
+        <h1>Register for GeoTrace</h1>
+        <p>Choose a username and password to unlock the protected lookup workflow.</p>
+
+        <form method="post" action="/register" class="auth-form">
+            <label for="username">Username</label>
+            <input
+                id="username"
+                name="username"
+                type="text"
+                value="{{ form_data.username if form_data else '' }}"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                required
+            >
+
+            <button type="submit" class="primary-button">Register</button>
+        </form>
+
+        <p class="auth-footer">Already registered? <a href="/login">Sign in here</a>.</p>
+    </article>
+</section>
+{% endblock %}
+

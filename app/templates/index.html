@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | GeoTrace{% endblock %}
+
+{% block content %}
+<section class="hero-card">
+    <div class="hero-copy">
+        <span class="eyebrow">Authenticated Lookup</span>
+        <h1>Inspect IP locations with a fast, clean workflow.</h1>
+        <p>Submit any valid IPv4 or IPv6 address to retrieve country, region, city, coordinates, timezone, and ISP data.</p>
+    </div>
+    <div class="hero-panel">
+        <form method="post" action="/lookup" class="lookup-form" data-loading-form>
+            <label for="ip_address">IP address</label>
+            <div class="input-row">
+                <input
+                    id="ip_address"
+                    name="ip_address"
+                    type="text"
+                    inputmode="text"
+                    placeholder="8.8.8.8 or 2001:4860:4860::8888"
+                    value="{{ form_data.ip_address if form_data else '' }}"
+                    required
+                >
+                <button type="submit">
+                    <span class="button-label">Lookup</span>
+                    <span class="button-spinner" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-label">Recent entries</span>
+                <strong>{{ history|length }}</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Signed in as</span>
+                <strong>{{ current_user.username }}</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-grid">
+    <article class="panel-card">
+        <div class="panel-header">
+            <h2>Request History</h2>
+            <p>Your latest persisted lookups from MongoDB.</p>
+        </div>
+        {% if history %}
+            <div class="history-list">
+                {% for record in history %}
+                    <article class="history-item">
+                        <div class="history-topline">
+                            <strong>{{ record.ip_address }}</strong>
+                            <time datetime="{{ record.requested_at.isoformat() }}">{{ record.requested_at.strftime("%Y-%m-%d %H:%M:%S") }}</time>
+                        </div>
+                        <p>{{ record.geolocation.city }}, {{ record.geolocation.region }}, {{ record.geolocation.country }}</p>
+                        <span class="history-meta">{{ record.geolocation.timezone }} · {{ record.geolocation.isp }}</span>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h3>No lookups yet</h3>
+                <p>Your recent searches will appear here after the first successful request.</p>
+            </div>
+        {% endif %}
+    </article>
+
+    <article class="panel-card accent-card">
+        <div class="panel-header">
+            <h2>What this UI does</h2>
+            <p>Everything here is server-rendered with Jinja2 on top of the same FastAPI service layer.</p>
+        </div>
+        <ul class="feature-list">
+            <li>JWT auth stored in an HTTP-only cookie</li>
+            <li>Server-side form handling for register, login, and lookup</li>
+            <li>Flash messages for validation and auth feedback</li>
+            <li>Protected dashboard and result pages</li>
+        </ul>
+        <a href="/result" class="secondary-link">Open latest result</a>
+    </article>
+</section>
+{% endblock %}
+

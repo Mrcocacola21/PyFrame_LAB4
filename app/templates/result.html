@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Lookup Result | GeoTrace{% endblock %}
+
+{% block content %}
+<section class="result-shell">
+    <article class="result-card">
+        <div class="panel-header">
+            <span class="eyebrow">Latest Lookup</span>
+            <h1>{{ result.ip_address }}</h1>
+            <p>Normalized geolocation response returned by the FastAPI service.</p>
+        </div>
+
+        <div class="result-grid">
+            <div class="result-field">
+                <span>Country</span>
+                <strong>{{ result.country }}</strong>
+            </div>
+            <div class="result-field">
+                <span>Region</span>
+                <strong>{{ result.region }}</strong>
+            </div>
+            <div class="result-field">
+                <span>City</span>
+                <strong>{{ result.city }}</strong>
+            </div>
+            <div class="result-field">
+                <span>Timezone</span>
+                <strong>{{ result.timezone }}</strong>
+            </div>
+            <div class="result-field">
+                <span>Latitude</span>
+                <strong>{{ result.latitude }}</strong>
+            </div>
+            <div class="result-field">
+                <span>Longitude</span>
+                <strong>{{ result.longitude }}</strong>
+            </div>
+            <div class="result-field result-field-wide">
+                <span>ISP</span>
+                <strong>{{ result.isp }}</strong>
+            </div>
+        </div>
+
+        <div class="result-actions">
+            <a href="/" class="primary-link">Back to dashboard</a>
+        </div>
+    </article>
+</section>
+{% endblock %}
+

@@ -13,15 +13,6 @@ Production-ready FastAPI service with a JWT-protected REST API, a Jinja2 server-
 - Request logging middleware and custom exception handlers
 - Automated tests for API and frontend auth/lookup flows
 
-## Run Locally
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -e .[dev]
-Copy-Item .env.example .env
-uvicorn app.main:app --reload
-```
 
 ## Required Environment Variables
 

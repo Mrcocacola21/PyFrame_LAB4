@@ -5,7 +5,10 @@ build-backend = "hatchling.build"
 [project]
 name = "ip-geolocation-service"
 version = "0.1.0"
-description = "FastAPI service for authenticated IP geolocation lookups with MongoDB history."
+description = "Python Frameworks"
+authors = [
+  { name = "Zienienkov Maksym" }
+]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

@@ -1,34 +1,64 @@
-# IP Geolocation Service
+# Python Frameworks
 
-Production-ready FastAPI service with a JWT-protected REST API, a Jinja2 server-rendered frontend, and MongoDB-backed lookup history.
+FastAPI application for authenticated IP geolocation lookups with a web UI, REST API, and MongoDB-backed history.
 
-## Features
+## Requirements
 
-- Layered architecture with routers, services, repositories, and schemas
-- User registration and login with `bcrypt` password hashing
-- JWT-protected IP geolocation lookup endpoint
-- Server-rendered frontend with Jinja2 templates and static assets
-- Async MongoDB access via `motor`
-- Request history persistence
-- Request logging middleware and custom exception handlers
-- Automated tests for API and frontend auth/lookup flows
+- `uv`
+- Python 3.12+
+- MongoDB
 
+## Setup
 
-## Required Environment Variables
+1. Install dependencies:
 
-- `JWT_SECRET_KEY` with at least 32 characters
+```powershell
+uv sync --dev
+```
+
+2. Create the environment file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+3. Update `.env` with your local values.
+
+Required variables:
+
+- `JWT_SECRET_KEY`
 - `MONGODB_URI`
 
-Optional variables are documented in `.env.example`.
+All available variables are listed in `.env.example`.
 
-## Web UI
+## Run
 
-- `/` dashboard and lookup form
-- `/login` login page
-- `/register` registration page
-- `/result` latest lookup result
+Start the development server:
 
-## API Overview
+```powershell
+uv run uvicorn app.main:app --reload
+```
+
+The app will be available at `http://127.0.0.1:8000`.
+
+## Tests
+
+Run the test suite:
+
+```powershell
+uv run pytest
+```
+
+## Routes
+
+Web pages:
+
+- `/`
+- `/login`
+- `/register`
+- `/result`
+
+API endpoints:
 
 - `POST /api/v1/auth/register`
 - `POST /api/v1/auth/login`
